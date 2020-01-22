@@ -2,6 +2,7 @@
 Helpers and wrappers for common RPyC tasks
 """
 import time
+import threading
 from rpyc.lib import spawn
 from rpyc.lib.colls import WeakValueDict
 from rpyc.lib.compat import callable
@@ -222,6 +223,7 @@ class BgServingThread(object):
             self.stop()
 
     def _bg_server(self):
+        print(f'[Info] BgServingThread begin: {threading.current_thread().name}.')
         try:
             while self._active:
                 self._conn.serve(self.SERVE_INTERVAL)
@@ -232,6 +234,7 @@ class BgServingThread(object):
                 if self._callback is None:
                     raise
                 self._callback()
+        print(f'[Info] BgServingThread end: {threading.current_thread().name}.')
 
     def stop(self):
         """stop the server thread. once stopped, it cannot be resumed. you will
