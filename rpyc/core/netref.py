@@ -145,7 +145,10 @@ class BaseNetref(with_metaclass(NetrefMetaclass, object)):
             if name == "__class__":
                 cls = object.__getattribute__(self, "__class__")
                 if cls is None:
-                    cls = self.__getattr__("__class__")
+                    try:
+                        cls = self.__getattr__("__class__")
+                    except:
+                        pass
                 return cls
             elif name == "__doc__":
                 return self.__getattr__("__doc__")
@@ -206,10 +209,20 @@ class BaseNetref(with_metaclass(NetrefMetaclass, object)):
         return syncreq(self, consts.HANDLE_CMP, other, '__ge__')
 
     def __repr__(self):
-        return syncreq(self, consts.HANDLE_REPR)
+        try:
+            ret = syncreq(self, consts.HANDLE_REPR)
+        except:
+            ret = '[Error] Object is invalid or request is timeout.'
+        finally:
+            return ret
 
     def __str__(self):
-        return syncreq(self, consts.HANDLE_STR)
+        try:
+            ret = syncreq(self, consts.HANDLE_STR)
+        except:
+            ret = '[Error] Object is invalid or request is timeout.'
+        finally:
+            return ret
 
     def __exit__(self, exc, typ, tb):
         return syncreq(self, consts.HANDLE_CTXEXIT, exc)  # can't pass type nor traceback
