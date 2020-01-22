@@ -323,9 +323,9 @@ def class_factory(id_pack, methods):
             _module = sys.modules.get(name_pack[:cursor])
             if _module is None:
                 cursor = name_pack.rfind('.')
-                continue
+                _module = sys.modules.get(name_pack[:cursor])
             _class_name = name_pack[cursor + 1:]
-            _class = getattr(_module, _class_name, None)
+            _class = getattr(_module, _class_name, None) if _module is not None else None
             if _class is not None and hasattr(_class, '__class__'):
                 class_descriptor = NetrefClass(_class)
             break
