@@ -4,7 +4,7 @@ of *magic*, so beware.
 import sys
 import types
 from rpyc.lib import get_methods, get_id_pack
-from rpyc.lib.compat import pickle, is_py3k, maxint, with_metaclass
+from rpyc.lib.compat import pickle, is_py_3k, maxint, with_metaclass
 from rpyc.core import consts
 
 
@@ -47,7 +47,7 @@ except NameError:
 else:
     _builtin_types.append(BaseException)
 
-if is_py3k:
+if is_py_3k:
     _builtin_types.extend([
         bytes, bytearray, type(iter(range(10))), memoryview,
     ])
@@ -335,10 +335,10 @@ def class_factory(id_pack, methods):
         while cursor != -1:
             _module = sys.modules.get(name_pack[:cursor])
             if _module is None:
-                cursor = name_pack.rfind('.')
-                _module = sys.modules.get(name_pack[:cursor])
+                cursor = name_pack[:cursor].rfind('.')
+                continue
             _class_name = name_pack[cursor + 1:]
-            _class = getattr(_module, _class_name, None) if _module is not None else None
+            _class = getattr(_module, _class_name, None)
             if _class is not None and hasattr(_class, '__class__'):
                 class_descriptor = NetrefClass(_class)
             break

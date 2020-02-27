@@ -1,3 +1,30 @@
+4.1.4
+-----
+Date: 1.30.2020
+
+- Merged 3.7 and 3.8 teleportatio compat enhancement `#371`_
+- Fixed connection hanging due to namepack cursor  `#369`_
+- Fixed test dependencies and is_py_* for 3.9
+
+.. _#371: https://github.com/tomerfiliba/rpyc/issues/371
+.. _#369: https://github.com/tomerfiliba/rpyc/issues/369
+
+4.1.3
+-----
+Date: 1.25.2020
+
+- Performance improvements: `#366`_ and `#351`_
+- Merged fix for propagate_KeyboardInterrupt_locally `#364`_
+- Fixed handling of exceptions for request callbacks `#365`_
+- Partially fixed return value for netref.__class__ `#355`_
+
+.. _#366: https://github.com/tomerfiliba/rpyc/issues/366
+.. _#351: https://github.com/tomerfiliba/rpyc/pull/351
+.. _#364: https://github.com/tomerfiliba/rpyc/pull/364
+.. _#365: https://github.com/tomerfiliba/rpyc/issues/365
+.. _#355: https://github.com/tomerfiliba/rpyc/issues/355
+
+
 4.1.2
 -----
 Date: 10.03.2019
