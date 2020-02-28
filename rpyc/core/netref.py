@@ -209,20 +209,10 @@ class BaseNetref(with_metaclass(NetrefMetaclass, object)):
         return syncreq(self, consts.HANDLE_CMP, other, '__ge__')
 
     def __repr__(self):
-        try:
-            ret = syncreq(self, consts.HANDLE_REPR)
-        except:
-            ret = '[Error] Object is invalid or request is timeout.'
-        finally:
-            return ret
+        return syncreq(self, consts.HANDLE_REPR)
 
     def __str__(self):
-        try:
-            ret = syncreq(self, consts.HANDLE_STR)
-        except:
-            ret = '[Error] Object is invalid or request is timeout.'
-        finally:
-            return ret
+        return syncreq(self, consts.HANDLE_STR)
 
     def __exit__(self, exc, typ, tb):
         return syncreq(self, consts.HANDLE_CTXEXIT, exc)  # can't pass type nor traceback
